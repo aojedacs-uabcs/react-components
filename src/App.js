@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.png";
+import "./App.css";
+import {
+  Container,
+  Row,
+  Col,
+  InputGroup,
+  Form,
+  Button,
+  Image,
+} from "react-bootstrap/";
+import RecipeCard from "./Components/RecipeCard.js";
+import recipes from "./recipes.js";
+import { useEffect, useState } from "react";
+import Encabezado from "./Components/Encabezado.js";
+import Buscador from "./Components/Buscador.js";
 
 function App() {
+  const [pokemonList, setPokemonList] = useState([]);
+
+  const [nombre, setNombre] = useState("Nombre");
+
+  const URL = "https://pokeapi.co/api/v2/pokemon?limit=150&offset=0";
+
+  useEffect(() => {
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // setPokemonList(data);
+      });
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <Encabezado logo={logo} titulo={"Juegos"} />
+        <Buscador texto={"Buscar Receta"} />
+      </Container>
     </div>
   );
 }
