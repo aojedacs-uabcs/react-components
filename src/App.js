@@ -13,7 +13,7 @@ import RecipeCard from "./Components/RecipeCard.js";
 import recipes from "./recipes.js";
 import { useEffect, useState } from "react";
 import Encabezado from "./Components/Encabezado.js";
-import Buscador from "./Components/Buscador.js";
+import Finder from "./Components/Finder.js";
 import PokemonCard from "./Components/PokemonCard.js";
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
 
   const [nombre, setNombre] = useState("Nombre");
   const [name, setName] = useState("Nombre");
+  const [pokemon, setPokemon] = useState("");
 
   const URL = "https://pokeapi.co/api/v2/pokemon?limit=150&offset=0";
 
@@ -37,12 +38,19 @@ function App() {
     <div className="App">
       <Container>
         {/* <Encabezado logo={logo} titulo={"Juegos"} /> */}
-        <Buscador texto={"Buscar Receta"} />
-        <ul>
+        <Finder texto={"Buscar Pokemon"} foundPokemon={setPokemon} />
+
+        {pokemon && (
+          <PokemonCard
+            name={pokemon.name}
+            image={pokemon.sprites.front_default}
+          />
+        )}
+
+        {/*       
           {pokemonList.map((pokemon, num) => (
             <PokemonCard name={pokemon.name} image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${num+1}.png`} />
-          ))}
-        </ul>
+          ))} */}
       </Container>
     </div>
   );
