@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import Encabezado from "./Components/Encabezado.js";
 import Finder from "./Components/Finder.js";
 import PokemonCard from "./Components/PokemonCard.js";
+import MyComponent from "./Components/MyComponent.js";
+import pokemonData from "./pokemonData.js";
 
 function App() {
   const [pokemonList, setPokemonList] = useState([]);
@@ -26,6 +28,8 @@ function App() {
   const URL = "https://pokeapi.co/api/v2/pokemon?limit=150&offset=0";
 
   useEffect(() => {
+
+    
     fetch(URL)
       .then((response) => response.json())
       .then((data) => {
@@ -37,14 +41,16 @@ function App() {
   return (
     <div className="App">
       <Container>
+        <h1>{pokemonData.base_experience}</h1>
         {/* <Encabezado logo={logo} titulo={"Juegos"} /> */}
         <Finder texto={"Buscar Pokemon"} foundPokemon={setPokemon} />
-
-        {pokemon && (
+        {pokemon ? (
           <PokemonCard
             name={pokemon.name}
             image={pokemon.sprites.front_default}
           />
+        ) : (
+          <h1>No se a encontrado pokemon</h1>
         )}
 
         {/*       
